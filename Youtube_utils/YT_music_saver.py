@@ -115,6 +115,15 @@ def update_history():
     if cfg.get("history"):
         history_box.set(cfg["history"][-1]["file"])
 
+# --- Новая функция вставки из буфера ---
+def paste_from_clipboard():
+    try:
+        clip = app.clipboard_get().strip()
+        url_entry.delete(0, 'end')
+        url_entry.insert(0, clip)
+    except Exception:
+        messagebox.showwarning("Внимание", "Буфер пуст или содержит недопустимые данные.")
+
 # --- UI ---
 cfg = load_config()
 ctk.set_appearance_mode("System")
@@ -122,13 +131,16 @@ ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
 app.title("YouTube Audio Downloader")
-app.geometry("550x620")
+app.geometry("550x650")
 app.resizable(False, False)
 
 # --- Поля ---
 ctk.CTkLabel(app, text="URL YouTube видео:").pack(pady=(10, 5), anchor='w', padx=20)
 url_entry = ctk.CTkEntry(app, width=480)
 url_entry.pack(padx=20)
+
+# Кнопка "Вставить из буфера"
+ctk.CTkButton(app, text="Вставить из буфера", command=paste_from_clipboard).pack(padx=20, pady=(5, 10), anchor='w')
 
 ctk.CTkLabel(app, text="Режим загрузки:").pack(pady=(15, 5), anchor='w', padx=20)
 proxy_switch = ctk.CTkOptionMenu(app, values=["Без прокси", "Shadowsocks"], command=toggle_proxy)
