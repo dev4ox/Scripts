@@ -3,3 +3,6 @@
 test/
 key/
 .env
+/YT_to_mp3/build/
+/YT_to_mp3/dist/
+/YT_to_mp3/YT_music_saver.spec
