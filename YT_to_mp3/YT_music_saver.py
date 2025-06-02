@@ -1,10 +1,21 @@
 import os
+import sys
 import json
 import threading
 import customtkinter as ctk
 from tkinter import filedialog, messagebox
 from yt_dlp import YoutubeDL
 from datetime import datetime
+
+
+
+
+# --- Для корректного билда ---
+def resource_path(relative_path):
+    """ Получить путь к ресурсу, работающий и в .exe и в IDE """
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 # --- Конфигурация ---
 CONFIG_PATH = os.path.join(os.path.expanduser("~"), ".yt_audio_downloader_config.json")
@@ -133,6 +144,8 @@ app = ctk.CTk()
 app.title("YouTube Audio Downloader")
 app.geometry("550x650")
 app.resizable(False, False)
+app.iconbitmap(resource_path("favicon.ico"))
+
 
 # --- Поля ---
 ctk.CTkLabel(app, text="URL YouTube видео:").pack(pady=(10, 5), anchor='w', padx=20)
