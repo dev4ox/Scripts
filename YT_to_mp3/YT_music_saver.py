@@ -7,8 +7,8 @@ from tkinter import filedialog, messagebox
 from yt_dlp import YoutubeDL
 from datetime import datetime
 
-
-
+# Build command:
+# pyinstaller --onefile --noconsole --icon=YT_to_mp3/favicon.ico --add-data "YT_to_mp3/favicon.ico;." YT_to_mp3/YT_music_saver.py
 
 # --- Для корректного билда ---
 def resource_path(relative_path):
